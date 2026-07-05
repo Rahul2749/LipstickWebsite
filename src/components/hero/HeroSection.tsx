@@ -72,11 +72,8 @@ export default function HeroSection() {
           if (p >= 0.65 && p <= 0.85) {
             const contentProgress = (p - 0.65) / 0.2;
             setContentOpacity(Math.min(1, contentProgress));
-          } else if (p > 0.85 && p <= 0.92) {
+          } else if (p > 0.85) {
             setContentOpacity(1);
-          } else if (p > 0.92) {
-            const fadeOut = 1 - ((p - 0.92) / 0.08);
-            setContentOpacity(Math.max(0, fadeOut));
           }
         },
       });
