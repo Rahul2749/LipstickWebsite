@@ -78,6 +78,8 @@ export default function PhilosophySection() {
             <img 
               src="/images/products/philosophy-campaign.png" 
               alt="Luxe Lipstick Campaign" 
+              loading="lazy"
+              decoding="async"
               className={styles.campaignImage}
             />
           </div>

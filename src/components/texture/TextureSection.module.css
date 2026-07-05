@@ -100,12 +100,44 @@
 
 /* Mobile */
 @media (max-width: 900px) {
+  .section {
+    width: 100%;
+    min-height: auto;
+    padding: var(--space-3xl) 0;
+  }
+
   .container {
     grid-template-columns: 1fr;
-    gap: var(--space-xl);
+    gap: var(--space-lg);
+    padding: 0 20px;
+  }
+
+  .imageCol {
+    order: 1;
+  }
+
+  .textCol {
+    order: 2;
+  }
+
+  .title {
+    font-size: clamp(2.15rem, 11vw, 3.2rem);
+  }
+
+  .description {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
   }
 
   .frame {
-    height: 45vh;
+    height: min(390px, 78vw);
+    border-radius: 8px;
+    padding: 8px;
+  }
+
+  .meta {
+    font-size: 0.78rem;
+    line-height: 1.5;
   }
 }

@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import FrameCanvas from './FrameCanvas';
 import { useFramePreloader } from '@/hooks/useFramePreloader';
+import { useIsMobile } from '@/hooks/useMediaQuery';
 import LoadingScreen from '../loading/LoadingScreen';
 import styles from './HeroSection.module.css';
 
@@ -25,6 +26,7 @@ export default function HeroSection() {
   const [heroVisible, setHeroVisible] = useState(false);
 
   const { frames, progress, isLoaded } = useFramePreloader();
+  const isMobile = useIsMobile();
 
   // Frame ref for GSAP (avoids React re-renders during scroll)
   const frameRef = useRef({ value: 0 });
@@ -34,9 +36,13 @@ export default function HeroSection() {
   // Handle loading complete
   const handleLoadComplete = useCallback(() => {
     setIsReady(true);
+    if (isMobile) {
+      setShowContent(true);
+      setContentOpacity(1);
+    }
     // Fade in hero
     setTimeout(() => setHeroVisible(true), 100);
-  }, []);
+  }, [isMobile]);
 
   // Handle smooth scroll down to next section
   const handleScrollDown = useCallback(() => {
@@ -48,7 +54,7 @@ export default function HeroSection() {
 
   // Setup GSAP ScrollTrigger after frames loaded
   useEffect(() => {
-    if (!isReady || !sectionRef.current || !pinRef.current || frames.length === 0) return;
+    if (!isReady || isMobile || !sectionRef.current || !pinRef.current || frames.length === 0) return;
 
     const totalFrames = frames.length;
 
@@ -106,7 +112,15 @@ export default function HeroSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [isReady, frames, showContent]);
+  }, [isReady, isMobile, frames, showContent]);
+
+  useEffect(() => {
+    if (!isReady || !isMobile) return;
+
+    setCurrentFrame(Math.min(10, Math.max(0, frames.length - 1)));
+    setShowContent(true);
+    setContentOpacity(1);
+  }, [frames.length, isMobile, isReady]);
 
   return (
     <>
@@ -117,7 +131,7 @@ export default function HeroSection() {
 
       <section
         ref={sectionRef}
-        className={styles.section}
+        className={`${styles.section} ${isMobile ? styles.mobileSection : ''}`}
         style={{ visibility: heroVisible ? 'visible' : 'hidden' }}
       >
         <div ref={pinRef} className={styles.pin}>

@@ -3,6 +3,7 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useIsMobile } from '@/hooks/useMediaQuery';
 import styles from './IngredientsSection.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -28,9 +29,10 @@ const ingredients = [
 export default function IngredientsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    if (!sectionRef.current || isMobile) return;
 
     const ctx = gsap.context(() => {
       // Parallax float effect for cards
@@ -56,7 +58,7 @@ export default function IngredientsSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
   return (
     <section ref={sectionRef} className={styles.section}>

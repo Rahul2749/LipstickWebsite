@@ -97,6 +97,8 @@ export default function ColorCollection() {
                   <img 
                     src={shade.image}
                     alt={shade.name}
+                    loading="lazy"
+                    decoding="async"
                     className={styles.image}
                   />
                 </div>

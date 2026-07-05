@@ -3,6 +3,7 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useIsMobile } from '@/hooks/useMediaQuery';
 import styles from './BrandStory.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,9 +12,10 @@ export default function BrandStory() {
   const sectionRef = useRef<HTMLElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    if (!sectionRef.current || isMobile) return;
 
     const ctx = gsap.context(() => {
       // Parallax scroll on split panels
@@ -56,7 +58,7 @@ export default function BrandStory() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
   return (
     <section ref={sectionRef} className={styles.section}>
@@ -77,6 +79,8 @@ export default function BrandStory() {
             <img 
               src="/images/campaign/brand-lifestyle.png" 
               alt="Luxury cosmetic vanity lifestyle" 
+              loading="lazy"
+              decoding="async"
               className={styles.image}
             />
           </div>

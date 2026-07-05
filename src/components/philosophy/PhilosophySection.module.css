@@ -105,13 +105,48 @@
 
 /* Mobile */
 @media (max-width: 768px) {
+  .section {
+    width: 100%;
+    min-height: auto;
+    padding: var(--space-3xl) 0;
+    overflow: clip;
+  }
+
   .container {
     grid-template-columns: 1fr;
-    padding: 0 var(--space-md);
-    text-align: center;
+    padding: 0 20px;
+    gap: var(--space-xl);
+    text-align: left;
   }
-  
+
+  .content {
+    gap: var(--space-lg);
+  }
+
+  .headline {
+    font-size: clamp(2.35rem, 12vw, 3.4rem);
+  }
+
   .points {
-    align-items: center;
+    gap: 0.85rem;
+    align-items: stretch;
+  }
+
+  .points li {
+    font-size: 0.82rem;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+  }
+
+  .line {
+    width: 24px;
+    flex: 0 0 24px;
+  }
+
+  .imageFrame {
+    max-width: none;
+    height: min(430px, 72vw);
+    border-radius: 8px;
+    padding: 8px;
   }
 }

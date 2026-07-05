@@ -3,6 +3,7 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useIsMobile } from '@/hooks/useMediaQuery';
 import styles from './TextureSection.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,9 +12,10 @@ export default function TextureSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    if (!sectionRef.current || isMobile) return;
 
     const ctx = gsap.context(() => {
       // Parallax scroll on the texture image
@@ -49,7 +51,7 @@ export default function TextureSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
   return (
     <section ref={sectionRef} className={styles.section}>
@@ -61,6 +63,8 @@ export default function TextureSection() {
               ref={imageRef}
               src="/images/campaign/texture-macro.png" 
               alt="Lipstick Smear Texture Close-up" 
+              loading="lazy"
+              decoding="async"
               className={styles.smearImage} 
             />
           </div>

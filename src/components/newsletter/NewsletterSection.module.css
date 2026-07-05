@@ -113,7 +113,37 @@
 
 /* Mobile */
 @media (max-width: 768px) {
+  .section {
+    width: 100%;
+    min-height: auto;
+    padding: var(--space-3xl) 0;
+  }
+
   .container {
-    padding: 0 var(--space-md);
+    padding: 0 20px;
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .title {
+    font-size: clamp(2.35rem, 13vw, 3.8rem);
+    line-height: 1.02;
+    margin-bottom: var(--space-xl);
+  }
+
+  .form {
+    max-width: none;
+    gap: 1.25rem;
+  }
+
+  .input {
+    text-align: left;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+  }
+
+  .submitBtn {
+    width: 100%;
+    padding: 1rem 1.25rem;
   }
 }

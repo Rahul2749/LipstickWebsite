@@ -103,10 +103,43 @@
 
 @media (max-width: 480px) {
   .content {
-    bottom: 8%;
+    left: 20px;
+    right: 20px;
+    bottom: 82px;
+    padding: 0;
+  }
+
+  .badge {
+    gap: 0.65rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .badgeLine {
+    width: 22px;
+  }
+
+  .badgeText {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+  }
+
+  .headline {
+    font-size: clamp(2.35rem, 13vw, 3.65rem);
+    line-height: 0.98;
+    margin-bottom: 0.9rem;
+    max-width: 340px;
   }
 
   .subtext {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+    max-width: 310px;
+    margin-bottom: 1.35rem;
+  }
+
+  .cta {
+    align-items: stretch;
+    max-width: 280px;
   }
 }

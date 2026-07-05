@@ -127,8 +127,52 @@
 
 /* Mobile */
 @media (max-width: 900px) {
+  .section {
+    width: 100%;
+    min-height: auto;
+    padding: var(--space-3xl) 0;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .header {
+    text-align: left;
+    margin-bottom: var(--space-xl);
+  }
+
+  .title {
+    font-size: clamp(2.15rem, 11vw, 3.25rem);
+  }
+
   .grid {
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: 1rem;
+    perspective: none;
+  }
+
+  .card {
+    align-items: flex-start;
+    text-align: left;
+    padding: 1.25rem;
+    border-radius: 14px;
+    transform-style: flat;
+  }
+
+  .avatar {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 1rem;
+  }
+
+  .quote {
+    font-size: 1.08rem;
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+  }
+
+  .role {
+    line-height: 1.4;
   }
 }

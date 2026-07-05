@@ -91,6 +91,8 @@ export default function PackagingSection() {
                 key={comp.title}
                 src={comp.image} 
                 alt={comp.title} 
+                loading="lazy"
+                decoding="async"
                 className={`${styles.detailImage} ${activeTab === idx ? styles.visibleImage : ''}`}
               />
             ))}

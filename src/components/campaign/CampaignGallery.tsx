@@ -3,6 +3,7 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useIsMobile } from '@/hooks/useMediaQuery';
 import styles from './CampaignGallery.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -12,9 +13,10 @@ export default function CampaignGallery() {
   const img1Ref = useRef<HTMLDivElement>(null);
   const img2Ref = useRef<HTMLDivElement>(null);
   const img3Ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || isMobile) return;
 
     const ctx = gsap.context(() => {
       // Parallax scroll effects on images
@@ -67,7 +69,7 @@ export default function CampaignGallery() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
   return (
     <section ref={containerRef} className={styles.section}>
@@ -83,6 +85,8 @@ export default function CampaignGallery() {
             <img 
               src="/images/campaign/editorial-1.png" 
               alt="Editorial model wearing deep red lipstick" 
+              loading="lazy"
+              decoding="async"
               className={styles.image}
             />
             <div className={styles.itemMeta}>Campaign Editorial I</div>
@@ -93,6 +97,8 @@ export default function CampaignGallery() {
             <img 
               src="/images/campaign/texture-macro.png" 
               alt="Lipstick macro texture detail" 
+              loading="lazy"
+              decoding="async"
               className={styles.image}
             />
             <div className={styles.itemMeta}>Tactile Smear Detail</div>
@@ -103,6 +109,8 @@ export default function CampaignGallery() {
             <img 
               src="/images/campaign/brand-lifestyle.png" 
               alt="Luxury cosmetic setting" 
+              loading="lazy"
+              decoding="async"
               className={styles.image}
             />
             <div className={styles.itemMeta}>Luxe Vanity Setting</div>

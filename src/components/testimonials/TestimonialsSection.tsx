@@ -3,6 +3,7 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useIsMobile } from '@/hooks/useMediaQuery';
 import styles from './TestimonialsSection.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -31,9 +32,10 @@ const testimonials = [
 export default function TestimonialsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || isMobile) return;
 
     const ctx = gsap.context(() => {
       cardsRef.current.forEach((card, i) => {
@@ -84,7 +86,7 @@ export default function TestimonialsSection() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
   return (
     <section ref={containerRef} className={styles.section}>
@@ -102,7 +104,7 @@ export default function TestimonialsSection() {
               ref={el => { cardsRef.current[i] = el; }}
             >
               <div className={styles.avatar}>
-                <img src={t.image} alt={t.author} className={styles.avatarImg} />
+                <img src={t.image} alt={t.author} loading="lazy" decoding="async" className={styles.avatarImg} />
               </div>
               <p className={styles.quote}>"{t.quote}"</p>
               <div className={styles.meta}>

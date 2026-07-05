@@ -143,9 +143,32 @@
 
 /* Mobile */
 @media (max-width: 900px) {
+  .section {
+    width: 100%;
+    padding: var(--space-3xl) 0;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .header {
+    text-align: left;
+    margin-bottom: var(--space-xl);
+  }
+
+  .title {
+    font-size: clamp(2.15rem, 11vw, 3.25rem);
+    line-height: 1.05;
+  }
+
+  .rows {
+    gap: var(--space-2xl);
+  }
+
   .row, .rowReverse {
     grid-template-columns: 1fr;
-    gap: var(--space-xl);
+    gap: 1rem;
   }
 
   .rowReverse .leftCol, .rowReverse .rightCol {
@@ -154,11 +177,40 @@
   }
 
   .leftCol {
-    text-align: center;
-    align-items: center;
+    text-align: left;
+    align-items: flex-start;
+    order: 2;
+  }
+
+  .rightCol {
+    order: 1;
+  }
+
+  .number {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .shadeName {
+    font-size: clamp(1.9rem, 9vw, 2.75rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .exploreBtn {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 999px;
   }
 
   .imageFrame {
-    height: 40vh;
+    height: min(390px, 78vw);
+    border-radius: 8px;
+    padding: 8px;
   }
 }

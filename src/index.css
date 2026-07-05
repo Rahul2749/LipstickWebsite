@@ -135,6 +135,30 @@ video {
   max-width: 100%;
 }
 
+@media (max-width: 640px) {
+  :root {
+    --space-sm: 0.85rem;
+    --space-md: 1.15rem;
+    --space-lg: 1.75rem;
+    --space-xl: 2.4rem;
+    --space-2xl: 3.2rem;
+    --space-3xl: 4rem;
+    --tracking-widest: 0.14em;
+    --tracking-wider: 0.1em;
+    --tracking-wide: 0.04em;
+  }
+
+  html,
+  body {
+    width: 100%;
+    overflow-x: clip;
+  }
+
+  body {
+    line-height: 1.55;
+  }
+}
+
 /* ========================= TYPOGRAPHY ========================= */
 .headline-serif {
   font-family: var(--font-serif);

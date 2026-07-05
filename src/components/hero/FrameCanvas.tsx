@@ -4,7 +4,7 @@ import { useEffect, useRef, useCallback } from 'react';
 import styles from './FrameCanvas.module.css';
 
 interface FrameCanvasProps {
-  frames: ImageBitmap[];
+  frames: Array<ImageBitmap | undefined>;
   currentFrame: number;
   opacity?: number;
 }
@@ -24,6 +24,20 @@ export default function FrameCanvas({ frames, currentFrame, opacity = 1 }: Frame
   const lastFrameRef = useRef<number>(-1);
   const rafRef = useRef<number>(0);
   const sizeRef = useRef({ w: 0, h: 0, dpr: 1 });
+
+  const getDrawableFrameIndex = useCallback((frameIndex: number) => {
+    if (frames[frameIndex]) return frameIndex;
+
+    for (let i = frameIndex - 1; i >= 0; i--) {
+      if (frames[i]) return i;
+    }
+
+    for (let i = frameIndex + 1; i < frames.length; i++) {
+      if (frames[i]) return i;
+    }
+
+    return -1;
+  }, [frames]);
 
   // Setup canvas and context
   const setupCanvas = useCallback(() => {
@@ -59,9 +73,11 @@ export default function FrameCanvas({ frames, currentFrame, opacity = 1 }: Frame
   // Draw a single frame to canvas — cover-fit (like object-fit: cover)
   const drawFrame = useCallback((frameIndex: number) => {
     const ctx = ctxRef.current;
-    if (!ctx || !frames[frameIndex]) return;
+    const drawableIndex = getDrawableFrameIndex(frameIndex);
+    if (!ctx || drawableIndex === -1) return;
 
-    const img = frames[frameIndex];
+    const img = frames[drawableIndex];
+    if (!img) return;
     const { w, h, dpr } = sizeRef.current;
 
     const canvasW = w * dpr;
@@ -88,16 +104,17 @@ export default function FrameCanvas({ frames, currentFrame, opacity = 1 }: Frame
     }
 
     ctx.drawImage(img, drawX, drawY, drawW, drawH);
-  }, [frames]);
+  }, [frames, getDrawableFrameIndex]);
 
   // Render loop — only redraws when frame changes
   useEffect(() => {
     const render = () => {
       const frameIdx = Math.max(0, Math.min(currentFrame, frames.length - 1));
+      const drawableFrameIdx = getDrawableFrameIndex(frameIdx);
 
-      if (frameIdx !== lastFrameRef.current && frames[frameIdx]) {
-        drawFrame(frameIdx);
-        lastFrameRef.current = frameIdx;
+      if (drawableFrameIdx !== -1 && drawableFrameIdx !== lastFrameRef.current) {
+        drawFrame(drawableFrameIdx);
+        lastFrameRef.current = drawableFrameIdx;
       }
 
       rafRef.current = requestAnimationFrame(render);
@@ -105,7 +122,7 @@ export default function FrameCanvas({ frames, currentFrame, opacity = 1 }: Frame
 
     rafRef.current = requestAnimationFrame(render);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [currentFrame, frames, drawFrame]);
+  }, [currentFrame, frames, drawFrame, getDrawableFrameIndex]);
 
   // Setup + resize handling
   useEffect(() => {

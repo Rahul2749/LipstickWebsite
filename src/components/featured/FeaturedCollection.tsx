@@ -72,7 +72,7 @@ export default function FeaturedCollection() {
               <div className={styles.productVisual}>
                 {/* Floating Lipstick Bullet */}
                 <div className={styles.productImageWrapper}>
-                  <img src={p.image} alt={p.name} className={styles.productImage} />
+                  <img src={p.image} alt={p.name} loading="lazy" decoding="async" className={styles.productImage} />
                 </div>
                 
                 {/* Luxury Floor Shadow */}
@@ -80,7 +80,7 @@ export default function FeaturedCollection() {
                 
                 {/* Mirror Reflection */}
                 <div className={styles.reflectionWrapper}>
-                  <img src={p.image} alt={p.name} className={styles.reflectionImage} />
+                  <img src={p.image} alt={p.name} loading="lazy" decoding="async" className={styles.reflectionImage} />
                 </div>
               </div>
 

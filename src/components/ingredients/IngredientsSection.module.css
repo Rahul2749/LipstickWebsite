@@ -94,8 +94,51 @@
 
 /* Mobile */
 @media (max-width: 900px) {
+  .section {
+    width: 100%;
+    min-height: auto;
+    padding: var(--space-3xl) 0;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .header {
+    text-align: left;
+    margin-bottom: var(--space-xl);
+  }
+
+  .title {
+    font-size: clamp(2.1rem, 11vw, 3.1rem);
+    line-height: 1.05;
+  }
+
+  .subtitle {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+  }
+
   .grid {
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: 1rem;
+  }
+
+  .card {
+    border-radius: 14px;
+    padding: 1.25rem;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .sphere {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 1rem;
+  }
+
+  .cardContent h3 {
+    font-size: 1.45rem;
   }
 }
