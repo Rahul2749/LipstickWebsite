@@ -145,72 +145,77 @@
 @media (max-width: 900px) {
   .section {
     width: 100%;
-    padding: var(--space-3xl) 0;
+    padding: var(--space-xl) 0;
   }
 
   .container {
-    padding: 0 20px;
+    padding: 0 15px;
   }
 
   .header {
     text-align: left;
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-md);
   }
 
   .title {
-    font-size: clamp(2.15rem, 11vw, 3.25rem);
+    font-size: clamp(1.4rem, 6vw, 2.2rem);
     line-height: 1.05;
   }
 
   .rows {
-    gap: var(--space-2xl);
+    gap: var(--space-md);
   }
 
   .row, .rowReverse {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    grid-template-columns: 1fr 1fr; /* Compact side-by-side layout */
+    gap: var(--space-sm);
+    align-items: center;
   }
 
-  .rowReverse .leftCol, .rowReverse .rightCol {
-    grid-column: auto;
-    grid-row: auto;
+  .rowReverse .leftCol {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .rowReverse .rightCol {
+    grid-column: 1;
+    grid-row: 1;
   }
 
   .leftCol {
     text-align: left;
     align-items: flex-start;
-    order: 2;
   }
 
   .rightCol {
-    order: 1;
   }
 
   .number {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.7rem;
+    margin-bottom: 0.25rem;
   }
 
   .shadeName {
-    font-size: clamp(1.9rem, 9vw, 2.75rem);
-    margin-bottom: 0.75rem;
+    font-size: clamp(1.1rem, 5vw, 1.8rem);
+    margin-bottom: 0.4rem;
   }
 
   .desc {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    font-size: 0.65rem;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
   }
 
   .exploreBtn {
     width: 100%;
-    padding: 0.9rem 1rem;
+    padding: 0.6rem 0.5rem;
+    font-size: 0.65rem;
     border-radius: 999px;
   }
 
   .imageFrame {
-    height: min(390px, 78vw);
-    border-radius: 8px;
-    padding: 8px;
+    height: 30vh;
+    border-radius: 6px;
+    padding: 4px;
   }
 }
