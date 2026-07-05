@@ -29,13 +29,21 @@ export default function HeroSection() {
   // Frame ref for GSAP (avoids React re-renders during scroll)
   const frameRef = useRef({ value: 0 });
   const hasFinishedRef = useRef(false);
-  const indicatorRef = useRef<HTMLDivElement>(null);
+  const indicatorRef = useRef<HTMLButtonElement>(null);
 
   // Handle loading complete
   const handleLoadComplete = useCallback(() => {
     setIsReady(true);
     // Fade in hero
     setTimeout(() => setHeroVisible(true), 100);
+  }, []);
+
+  // Handle smooth scroll down to next section
+  const handleScrollDown = useCallback(() => {
+    const target = document.getElementById('philosophy');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
   }, []);
 
   // Setup GSAP ScrollTrigger after frames loaded
@@ -122,11 +130,16 @@ export default function HeroSection() {
             />
           )}
 
-          {/* Scroll Down Indicator */}
-          <div ref={indicatorRef} className={styles.scrollIndicator}>
+          {/* Scroll Down Indicator (Button) */}
+          <button 
+            ref={indicatorRef} 
+            className={styles.scrollIndicator}
+            onClick={handleScrollDown}
+            aria-label="Scroll down to campaign details"
+          >
             <span>Scroll Down</span>
             <div className={styles.indicatorLine}></div>
-          </div>
+          </button>
 
           {/* Content — appears at ~70% scroll */}
           {showContent && (

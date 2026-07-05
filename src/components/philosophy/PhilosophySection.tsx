@@ -50,7 +50,7 @@ export default function PhilosophySection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className={styles.section}>
+    <section id="philosophy" ref={sectionRef} className={styles.section}>
       <div className={styles.container}>
         {/* Left column: Typography and values */}
         <div className={styles.content}>
