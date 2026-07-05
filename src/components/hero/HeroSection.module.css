@@ -44,9 +44,15 @@
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   z-index: 10;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
   pointer-events: none;
   animation: pulseIndicator 3s infinite ease-in-out;
+}
+
+.scrollIndicator.hidden {
+  opacity: 0 !important;
+  pointer-events: none;
+  animation: none !important;
 }
 
 .indicatorLine {

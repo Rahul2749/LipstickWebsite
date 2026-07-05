@@ -56,11 +56,13 @@ export default function HeroSection() {
         onUpdate: (self) => {
           let p = self.progress;
 
-          // Fade out the Scroll Down helper instantly as soon as user starts scrolling
+          // Toggle hidden class instantly as soon as user starts scrolling
           if (indicatorRef.current) {
-            const indOpacity = p > 0.002 ? 0 : 1;
-            indicatorRef.current.style.opacity = indOpacity.toString();
-            indicatorRef.current.style.pointerEvents = indOpacity === 0 ? 'none' : 'auto';
+            if (p > 0.005) {
+              indicatorRef.current.classList.add(styles.hidden);
+            } else {
+              indicatorRef.current.classList.remove(styles.hidden);
+            }
           }
 
           // Once the animation fully finishes (reaches 98%), lock it.
