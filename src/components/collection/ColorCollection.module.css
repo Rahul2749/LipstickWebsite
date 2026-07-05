@@ -145,77 +145,80 @@
 @media (max-width: 900px) {
   .section {
     width: 100%;
-    padding: var(--space-xl) 0;
+    padding: var(--space-3xl) 0;
   }
 
   .container {
-    padding: 0 15px;
+    padding: 0;
   }
 
   .header {
-    text-align: left;
-    margin-bottom: var(--space-md);
+    text-align: center;
+    padding: 0 20px;
+    margin-bottom: var(--space-2xl);
   }
 
   .title {
-    font-size: clamp(1.4rem, 6vw, 2.2rem);
-    line-height: 1.05;
+    font-size: clamp(2.2rem, 10vw, 3.25rem);
+    line-height: 1.1;
+    font-weight: 300;
   }
 
   .rows {
-    gap: var(--space-md);
+    gap: var(--space-3xl);
   }
 
   .row, .rowReverse {
-    grid-template-columns: 1fr 1fr; /* Compact side-by-side layout */
-    gap: var(--space-sm);
-    align-items: center;
+    display: flex;
+    flex-direction: column-reverse; /* Image on top, text below */
+    gap: 0;
   }
 
-  .rowReverse .leftCol {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  .rowReverse .rightCol {
-    grid-column: 1;
-    grid-row: 1;
+  .leftCol, .rightCol {
+    width: 100%;
   }
 
   .leftCol {
-    text-align: left;
-    align-items: flex-start;
-  }
-
-  .rightCol {
+    text-align: center;
+    align-items: center;
+    padding: var(--space-xl) 24px 0 24px; /* Spacious padding for text */
   }
 
   .number {
-    font-size: 0.7rem;
-    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+    margin-bottom: var(--space-sm);
+    letter-spacing: 0.15em;
   }
 
   .shadeName {
-    font-size: clamp(1.1rem, 5vw, 1.8rem);
-    margin-bottom: 0.4rem;
+    font-size: clamp(1.9rem, 9vw, 2.75rem);
+    margin-bottom: var(--space-sm);
+    font-weight: 300;
   }
 
   .desc {
-    font-size: 0.65rem;
-    line-height: 1.3;
-    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-xl);
   }
 
   .exploreBtn {
     width: 100%;
-    padding: 0.6rem 0.5rem;
-    font-size: 0.65rem;
+    max-width: 300px;
+    padding: 0.9rem 1rem;
+    font-size: 0.85rem;
     border-radius: 999px;
   }
 
   .imageFrame {
-    height: 30vh;
-    border-radius: 6px;
-    padding: 4px;
+    height: 60vh;
+    border-radius: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+  }
+
+  .image {
+    border-radius: 0;
   }
 }
