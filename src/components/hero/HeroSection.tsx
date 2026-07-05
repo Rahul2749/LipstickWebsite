@@ -28,7 +28,8 @@ export default function HeroSection() {
 
   // Frame ref for GSAP (avoids React re-renders during scroll)
   const frameRef = useRef({ value: 0 });
-  const maxProgressRef = useRef(0);
+  const hasFinishedRef = useRef(false);
+  const indicatorRef = useRef<HTMLDivElement>(null);
 
   // Handle loading complete
   const handleLoadComplete = useCallback(() => {
@@ -53,11 +54,26 @@ export default function HeroSection() {
         scrub: 1.5,
         anticipatePin: 1,
         onUpdate: (self) => {
-          // Lock animation to only advance forward (no reverse scrub on scroll up)
-          maxProgressRef.current = Math.max(maxProgressRef.current, self.progress);
-          const p = maxProgressRef.current;
+          let p = self.progress;
 
-          // === FRAME SEQUENCE (0–100%) ===
+          // Fade out the Scroll Down helper as soon as the user scrolls
+          if (indicatorRef.current) {
+            const indOpacity = Math.max(0, 1 - p * 15);
+            indicatorRef.current.style.opacity = indOpacity.toString();
+            indicatorRef.current.style.pointerEvents = indOpacity === 0 ? 'none' : 'auto';
+          }
+
+          // Once the animation fully finishes (reaches 98%), lock it.
+          // Otherwise, allow normal forward/backward scrubbing.
+          if (p >= 0.98) {
+            hasFinishedRef.current = true;
+          }
+
+          if (hasFinishedRef.current) {
+            p = 1.0;
+          }
+
+          // === FRAME SEQUENCE ===
           const targetFrame = Math.floor(p * (totalFrames - 1));
           if (targetFrame !== frameRef.current.value) {
             frameRef.current.value = targetFrame;
@@ -103,6 +119,12 @@ export default function HeroSection() {
               opacity={1}
             />
           )}
+
+          {/* Scroll Down Indicator */}
+          <div ref={indicatorRef} className={styles.scrollIndicator}>
+            <span>Scroll Down</span>
+            <div className={styles.indicatorLine}></div>
+          </div>
 
           {/* Content — appears at ~70% scroll */}
           {showContent && (
