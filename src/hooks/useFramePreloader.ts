@@ -82,36 +82,11 @@ export function useFramePreloader(manifestUrl: string = '/frames/frames.json'): 
         });
       };
 
-      // Step 3: Load the first few frames before showing the page.
-      const CRITICAL_FRAME_COUNT = Math.min(12, count);
-      let criticalLoaded = 0;
-
-      await Promise.all(
-        Array.from({ length: CRITICAL_FRAME_COUNT }, async (_, index) => {
-          try {
-            await loadFrame(index);
-          } catch (err) {
-            console.warn(`Failed to load critical frame ${index}:`, err);
-          } finally {
-            criticalLoaded++;
-            setProgress((criticalLoaded / CRITICAL_FRAME_COUNT) * 100);
-          }
-        })
-      );
-
-      if (abortController.signal.aborted) return;
-
-      setFrames([...loadedFrames]);
-      setIsLoaded(true);
-      setProgress(100);
-
-      // Step 4: Fill the rest once the browser has had a chance to paint.
-      await waitForIdle();
-
-      const BATCH_SIZE = 6;
+      // Step 3: Load all frames in batches for optimal throughput without locking the UI thread
+      const BATCH_SIZE = 10;
       let loadedCount = 0;
 
-      for (let batchStart = CRITICAL_FRAME_COUNT; batchStart < count; batchStart += BATCH_SIZE) {
+      for (let batchStart = 0; batchStart < count; batchStart += BATCH_SIZE) {
         if (abortController.signal.aborted) return;
 
         const batchEnd = Math.min(batchStart + BATCH_SIZE, count);
@@ -126,14 +101,21 @@ export function useFramePreloader(manifestUrl: string = '/frames/frames.json'): 
                 console.warn(`Failed to load frame ${i}:`, err);
               } finally {
                 loadedCount++;
+                setProgress((loadedCount / count) * 100);
               }
             })()
           );
         }
 
         await Promise.all(batchPromises);
-        setFrames([...loadedFrames]);
       }
+
+      if (abortController.signal.aborted) return;
+
+      // Step 4: Set frames and mark complete
+      setFrames([...loadedFrames]);
+      setIsLoaded(true);
+      setProgress(100);
 
     } catch (err) {
       if (!abortController.signal.aborted) {
