@@ -4,8 +4,6 @@ import { Suspense, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
 import * as THREE from 'three';
-import LipstickModel from './LipstickModel';
-import LipstickCap from './LipstickCap';
 import ParticleField from './ParticleField';
 import SilkRibbons from './SilkRibbons';
 
@@ -114,8 +112,6 @@ export default function LipstickScene({
           <CameraRig mouseX={mouseX} mouseY={mouseY} />
           <SceneLighting />
 
-          <LipstickModel />
-          <LipstickCap />
           <ParticleField count={particleCount} radius={5} />
           {!isMobile && <SilkRibbons />}
 
