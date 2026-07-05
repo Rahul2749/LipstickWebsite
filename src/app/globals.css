@@ -1,40 +1,121 @@
+/* ============================================================
+   LUXURY BEAUTY BRAND — DESIGN SYSTEM
+   Premium CSS foundation inspired by Dior, Chanel, Prada
+   ============================================================ */
+
+/* --- Google Fonts (loaded in layout.tsx via next/font) --- */
+
+/* ========================= TOKENS ========================= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Color Palette */
+  --color-black: #0a0a0a;
+  --color-deep-black: #050505;
+  --color-ivory: #faf5ef;
+  --color-champagne: #c9a96e;
+  --color-champagne-light: #dfc291;
+  --color-burgundy: #6b1d2a;
+  --color-burgundy-deep: #4a1018;
+  --color-rose: #c4566a;
+  --color-rose-soft: #d4869a;
+  --color-muted: rgba(250, 245, 239, 0.6);
+  --color-muted-light: rgba(250, 245, 239, 0.35);
+  --color-overlay-dark: rgba(10, 10, 10, 0.45);
+  --color-overlay-gradient: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.15) 0%,
+    rgba(10, 10, 10, 0.3) 40%,
+    rgba(10, 10, 10, 0.55) 100%
+  );
+
+  /* Typography Scale */
+  --font-size-hero: clamp(3.2rem, 7vw, 7.5rem);
+  --font-size-hero-sub: clamp(1rem, 1.6vw, 1.35rem);
+  --font-size-cta: clamp(0.8rem, 1vw, 0.95rem);
+  --font-size-nav: 0.85rem;
+  --font-size-body: 1rem;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 8rem;
+
+  /* Letter Spacing */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.14em;
+  --tracking-widest: 0.22em;
+
+  /* Line Height */
+  --leading-tight: 1.05;
+  --leading-snug: 1.2;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.8;
+
+  /* Easing — Luxury Curves */
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  /* Transitions */
+  --transition-fast: 0.3s var(--ease-luxury);
+  --transition-medium: 0.6s var(--ease-luxury);
+  --transition-slow: 1s var(--ease-out-expo);
+
+  /* Z-Index Layers */
+  --z-video: 1;
+  --z-overlay: 2;
+  --z-particles: 3;
+  --z-content: 10;
+  --z-three: 15;
+  --z-nav: 100;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ========================= RESET ========================= */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  background-color: var(--color-black);
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ivory);
+  background-color: var(--color-black);
+  overflow-x: hidden;
+  line-height: var(--leading-normal);
 }
 
 a {
@@ -42,8 +123,232 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+/* ========================= TYPOGRAPHY ========================= */
+.headline-serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.text-sans {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-wide);
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+}
+
+/* ========================= GPU UTILITIES ========================= */
+.gpu-accelerated {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.gpu-transform {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ========================= FILM GRAIN ========================= */
+.film-grain {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  animation: grain 0.5s steps(1) infinite;
+}
+
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
   }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
+}
+
+/* ========================= BUTTONS ========================= */
+.btn-luxury {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 2.4rem;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-cta);
+  font-weight: 400;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  border: 1px solid rgba(250, 245, 239, 0.3);
+  border-radius: 0;
+  color: var(--color-ivory);
+  background: transparent;
+  overflow: hidden;
+  transition: all var(--transition-medium);
+  cursor: pointer;
+}
+
+.btn-luxury::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-ivory);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-luxury);
+  z-index: -1;
+}
+
+.btn-luxury:hover {
+  color: var(--color-black);
+  border-color: var(--color-ivory);
+  box-shadow: 0 4px 30px rgba(201, 169, 110, 0.15);
+  transform: translateY(-2px);
+}
+
+.btn-luxury:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-luxury-primary {
+  background: var(--color-ivory);
+  color: var(--color-black);
+  border-color: var(--color-ivory);
+}
+
+.btn-luxury-primary::before {
+  background: var(--color-champagne);
+}
+
+.btn-luxury-primary:hover {
+  color: var(--color-black);
+  border-color: var(--color-champagne);
+}
+
+/* ========================= LINK STYLES ========================= */
+.link-reveal {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.link-reveal::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-champagne);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s var(--ease-luxury);
+}
+
+.link-reveal:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ========================= SCROLL SECTION ========================= */
+.section-next {
+  position: relative;
+  min-height: 100vh;
+  background: var(--color-deep-black);
+  z-index: 20;
+}
+
+/* ========================= RESPONSIVE ========================= */
+@media (max-width: 768px) {
+  :root {
+    --font-size-hero: clamp(2.2rem, 10vw, 3.5rem);
+    --font-size-hero-sub: clamp(0.85rem, 3vw, 1rem);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-size-hero: clamp(1.8rem, 10vw, 2.8rem);
+  }
+}
+
+/* ========================= SELECTION ========================= */
+::selection {
+  background: var(--color-champagne);
+  color: var(--color-black);
+}
+
+::-moz-selection {
+  background: var(--color-champagne);
+  color: var(--color-black);
+}
+
+/* ========================= SCROLLBAR ========================= */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 169, 110, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 169, 110, 0.5);
 }

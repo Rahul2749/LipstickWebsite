@@ -1,0 +1,8 @@
+{
+  "count": 240,
+  "fps": 24,
+  "duration": 10,
+  "format": "jpg",
+  "pattern": "frame_{n}.jpg",
+  "basePath": "/frames/"
+}

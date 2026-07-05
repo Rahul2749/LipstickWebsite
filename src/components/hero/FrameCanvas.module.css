@@ -1,0 +1,13 @@
+.canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  will-change: opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  /* Smooth opacity transitions */
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}

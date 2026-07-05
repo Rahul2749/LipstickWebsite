@@ -1,0 +1,38 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-overlay);
+  pointer-events: none;
+}
+
+/* Premium gradient overlay */
+.gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.1) 0%,
+    rgba(10, 10, 10, 0.2) 30%,
+    rgba(10, 10, 10, 0.45) 70%,
+    rgba(10, 10, 10, 0.65) 100%
+  );
+}
+
+/* Subtle side vignette */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    transparent 50%,
+    rgba(5, 5, 5, 0.4) 100%
+  );
+}
+
+/* Particle canvas layer */
+.particles {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-particles);
+  pointer-events: none;
+}

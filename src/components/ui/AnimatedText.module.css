@@ -1,0 +1,26 @@
+.container {
+  display: block;
+}
+
+.lineWrapper {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.05em;
+}
+
+.line {
+  display: block;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+.charWrapper {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.char {
+  display: inline-block;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}

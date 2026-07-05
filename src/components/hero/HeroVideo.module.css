@@ -1,0 +1,38 @@
+.wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: var(--z-video);
+}
+
+.poster {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 40% 50%,
+    #1a0a0e 0%,
+    #0a0a0a 70%,
+    #050505 100%
+  );
+  z-index: 0;
+}
+
+.video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%) translateZ(0);
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  z-index: 1;
+}
+
+.videoReady {
+  opacity: 1;
+}

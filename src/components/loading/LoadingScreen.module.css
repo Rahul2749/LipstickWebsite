@@ -1,0 +1,100 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.loader.exiting {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  background: #faf5ef;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.brandAccent {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: rgba(10, 10, 10, 0.2);
+}
+
+.brandName {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  color: #0a0a0a;
+  margin: 0;
+}
+
+.brandTagline {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.5em;
+  color: rgba(10, 10, 10, 0.4);
+  margin-bottom: 3rem;
+}
+
+/* Loading bar */
+.barContainer {
+  width: 180px;
+  height: 1px;
+  background: rgba(10, 10, 10, 0.08);
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+}
+
+.barFill {
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Percentage */
+.percentage {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: rgba(10, 10, 10, 0.35);
+}
+
+@media (max-width: 768px) {
+  .brandName {
+    font-size: 1.8rem;
+  }
+
+  .barContainer {
+    width: 140px;
+  }
+}
