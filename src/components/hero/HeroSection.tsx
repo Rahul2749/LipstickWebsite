@@ -64,9 +64,9 @@ export default function HeroSection() {
         onUpdate: (self) => {
           let p = self.progress;
 
-          // Toggle hidden class instantly as soon as user starts scrolling
+          // Toggle hidden class instantly as soon as user scrolls past 10% progress
           if (indicatorRef.current) {
-            if (p > 0.005) {
+            if (p > 0.10) {
               indicatorRef.current.classList.add(styles.hidden);
             } else {
               indicatorRef.current.classList.remove(styles.hidden);
@@ -135,10 +135,22 @@ export default function HeroSection() {
             ref={indicatorRef} 
             className={styles.scrollIndicator}
             onClick={handleScrollDown}
-            aria-label="Scroll down to campaign details"
+            aria-label="Scroll to reveal campaign details"
           >
-            <span>Scroll Down</span>
-            <div className={styles.indicatorLine}></div>
+            {/* Refined downward arrow connected to a vertical line */}
+            <div className={styles.indicatorVisual}>
+              <svg 
+                width="16" 
+                height="40" 
+                viewBox="0 0 16 40" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line x1="8" y1="0" x2="8" y2="34" stroke="#857B78" strokeWidth="1" strokeOpacity="0.6" />
+                <path d="M4 30L8 34L12 30" stroke="#857B78" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <span className={styles.indicatorText}>Scroll to Reveal</span>
           </button>
 
           {/* Content — appears at ~70% scroll */}
