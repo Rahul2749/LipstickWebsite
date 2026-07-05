@@ -56,9 +56,9 @@ export default function HeroSection() {
         onUpdate: (self) => {
           let p = self.progress;
 
-          // Fade out the Scroll Down helper as soon as the user scrolls
+          // Fade out the Scroll Down helper instantly as soon as user starts scrolling
           if (indicatorRef.current) {
-            const indOpacity = Math.max(0, 1 - p * 15);
+            const indOpacity = p > 0.002 ? 0 : 1;
             indicatorRef.current.style.opacity = indOpacity.toString();
             indicatorRef.current.style.pointerEvents = indOpacity === 0 ? 'none' : 'auto';
           }
