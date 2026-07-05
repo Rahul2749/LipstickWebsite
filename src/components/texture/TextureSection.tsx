@@ -9,47 +9,40 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function TextureSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const maskRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!sectionRef.current || !maskRef.current) return;
+    if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Pin section
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: '+=150%',
-        pin: true,
-        scrub: 1,
-      });
-
-      // Animate clip path expansion (smear spreading effect)
-      gsap.fromTo(maskRef.current,
-        { clipPath: 'polygon(45% 20%, 55% 20%, 53% 80%, 47% 80%)' },
+      // Parallax scroll on the texture image
+      gsap.fromTo(imageRef.current,
+        { scale: 1.1, yPercent: -10 },
         {
-          clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+          scale: 1,
+          yPercent: 10,
+          ease: 'none',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top top',
-            end: '+=120%',
-            scrub: 1,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
           }
         }
       );
 
-      // Animate minimal text fading in
-      gsap.fromTo(textRef.current,
-        { opacity: 0, y: 30 },
+      // Staggered reveal for text content
+      gsap.fromTo(textRef.current?.children || [],
+        { y: 50, opacity: 0 },
         {
-          opacity: 1,
           y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.2,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top -50%',
-            end: 'top -120%',
-            scrub: 1,
+            start: 'top 75%',
           }
         }
       );
@@ -60,25 +53,30 @@ export default function TextureSection() {
 
   return (
     <section ref={sectionRef} className={styles.section}>
-      {/* Background/Before Texture */}
-      <div className={styles.bgContainer}>
-        <div className={styles.beforeBg} />
-      </div>
+      <div className={styles.container}>
+        {/* Left Side: Elegant Framed Texture Close-up */}
+        <div className={styles.imageCol}>
+          <div className={styles.frame}>
+            <img 
+              ref={imageRef}
+              src="/images/campaign/texture-macro.png" 
+              alt="Lipstick Smear Texture Close-up" 
+              className={styles.smearImage} 
+            />
+          </div>
+        </div>
 
-      {/* Spreading Smear / After Texture */}
-      <div ref={maskRef} className={styles.smearContainer}>
-        <img 
-          src="/images/campaign/texture-macro.png" 
-          alt="Lipstick Smear Texture Close-up" 
-          className={styles.smearImage} 
-        />
-      </div>
-
-      <div ref={textRef} className={styles.textContent}>
-        <h2 className={styles.title}>The Sensory Touch</h2>
-        <p className={styles.description}>
-          Experience the weightless glide. A cream-to-powder texture that spreads effortlessly, leaving a flawless velvet matte veil.
-        </p>
+        {/* Right Side: Editorial Text */}
+        <div ref={textRef} className={styles.textCol}>
+          <span className={styles.badge}>Sensory Detail</span>
+          <h2 className={styles.title}>The Creamy Glide</h2>
+          <p className={styles.description}>
+            A rich, decadent formula that melts on touch. Micro-milled pigments suspended in natural plant oils offer a seamless application with a zero-weight matte finish.
+          </p>
+          <div className={styles.meta}>
+            <span className={styles.metaLabel}>Texture:</span> Matte Cream-to-Powder
+          </div>
+        </div>
       </div>
     </section>
   );
