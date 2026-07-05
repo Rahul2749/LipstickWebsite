@@ -2,14 +2,13 @@
   position: relative;
   /* 300vh scroll distance for pinning */
   height: 400vh;
+  background: var(--color-black);
 }
 
 .pin {
   position: relative;
   width: 100vw !important;
   height: 100vh !important;
-  height: 100svh !important;
-  height: 100dvh !important;
   overflow: hidden;
   background: var(--color-black);
 }
