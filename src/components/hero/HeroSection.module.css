@@ -38,38 +38,52 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
   color: var(--color-text-heading);
-  font-size: 0.85rem;
-  letter-spacing: var(--tracking-wider);
+  font-size: 0.75rem;
+  letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   z-index: 10;
   transition: opacity 0.3s ease;
   pointer-events: none;
+  animation: pulseIndicator 3s infinite ease-in-out;
 }
 
 .indicatorLine {
   width: 1px;
-  height: 40px;
-  background-color: var(--color-secondary);
-  animation: scrollLineAnim 2s infinite ease-in-out;
+  height: 50px;
+  background-color: rgba(201, 169, 110, 0.2);
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes scrollLineAnim {
-  0% {
-    transform: scaleY(0);
-    transform-origin: top;
+.indicatorLine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(to bottom, rgba(201, 169, 110, 0), rgba(201, 169, 110, 1), rgba(201, 169, 110, 0));
+  animation: slideLine 2s infinite cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pulseIndicator {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translate(-50%, 0);
   }
   50% {
-    transform: scaleY(1);
-    transform-origin: top;
+    opacity: 1;
+    transform: translate(-50%, -6px);
   }
-  51% {
-    transform: scaleY(1);
-    transform-origin: bottom;
+}
+
+@keyframes slideLine {
+  0% {
+    top: -20px;
   }
   100% {
-    transform: scaleY(0);
-    transform-origin: bottom;
+    top: 50px;
   }
 }
