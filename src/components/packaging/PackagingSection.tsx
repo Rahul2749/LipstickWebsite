@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, Environment } from '@react-three/drei';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ExplodedLipstick from './ExplodedLipstick';
@@ -50,15 +50,15 @@ export default function PackagingSection() {
         <div className={styles.canvasContainer}>
           <Canvas 
             gl={{ localClippingEnabled: true, antialias: true }} 
-            camera={{ position: [0, 0, 5], fov: 45 }}
+            camera={{ position: [0, 0, 4.5], fov: 45 }}
           >
-            <ambientLight intensity={1.2} />
-            <directionalLight position={[5, 10, 5]} intensity={2} />
-            <pointLight position={[-5, -5, -5]} intensity={0.5} />
-            <spotLight position={[0, 5, 0]} intensity={1.5} penumbra={1} />
+            <ambientLight intensity={0.7} />
+            <directionalLight position={[5, 8, 5]} intensity={1.5} />
+            <pointLight position={[-5, -5, -5]} intensity={0.2} />
             
             <ExplodedLipstick progress={scrollProgress} />
             
+            <Environment preset="studio" />
             <OrbitControls enableZoom={false} enablePan={false} />
           </Canvas>
         </div>

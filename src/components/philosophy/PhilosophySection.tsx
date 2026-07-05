@@ -52,6 +52,7 @@ export default function PhilosophySection() {
   return (
     <section ref={sectionRef} className={styles.section}>
       <div className={styles.container}>
+        {/* Left column: Typography and values */}
         <div className={styles.content}>
           <h2 ref={headlineRef} className={styles.headline}>
             Beauty, Crafted<br />to Perfection.
@@ -74,6 +75,17 @@ export default function PhilosophySection() {
               Cruelty Free
             </li>
           </ul>
+        </div>
+
+        {/* Right column: Premium editorial product visual */}
+        <div className={styles.visualCol}>
+          <div className={styles.imageFrame}>
+            <img 
+              src="/images/products/philosophy-campaign.png" 
+              alt="Luxe Lipstick Campaign" 
+              className={styles.campaignImage}
+            />
+          </div>
         </div>
       </div>
     </section>
