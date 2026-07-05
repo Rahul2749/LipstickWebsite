@@ -39,6 +39,7 @@ export default function HeroSection() {
 
   // Frame ref for GSAP (avoids React re-renders during scroll)
   const frameRef = useRef({ value: 0 });
+  const maxProgressRef = useRef(0);
 
   // Handle loading complete
   const handleLoadComplete = useCallback(() => {
@@ -63,7 +64,9 @@ export default function HeroSection() {
         scrub: 1.5,
         anticipatePin: 1,
         onUpdate: (self) => {
-          const p = self.progress;
+          // Lock animation to only advance forward (no reverse scrub on scroll up)
+          maxProgressRef.current = Math.max(maxProgressRef.current, self.progress);
+          const p = maxProgressRef.current;
 
           // === FRAME SEQUENCE (0–100%) ===
           const targetFrame = Math.floor(p * (totalFrames - 1));
