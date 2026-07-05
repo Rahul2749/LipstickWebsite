@@ -10,14 +10,14 @@
   /* Design System: Colors Extracted from Light Theme Campaign Image */
   --color-primary: #9c1c31; /* Deep Velvet Red Accent */
   --color-secondary: #c9a96e; /* Champagne Gold */
-  --color-accent: #f0c3c3; /* Soft Blush Pink */
-  --color-background: #fbf5f5; /* Light Blush Pink Background */
-  --color-surface: #ffffff; /* Premium Pure White Surface */
-  --color-border: rgba(201, 169, 110, 0.25); /* Champagne Gold Border */
+  --color-accent: #ecb5be; /* Soft Blush Pink */
+  --color-background: #f5dadf; /* Richer Soft Pink from the Hero/Podium Image */
+  --color-surface: #fdf2f4; /* Lighter Pinkish Surface */
+  --color-border: rgba(156, 28, 49, 0.12); /* Soft Crimson Border */
   
   /* Typography Colors */
-  --color-text-heading: #261618; /* Dark Crimson Charcoal for high contrast */
-  --color-text-body: rgba(38, 22, 24, 0.7); /* Muted Dark Charcoal */
+  --color-text-heading: #38161a; /* Rich Velvet Burgundy for high contrast editorial typography */
+  --color-text-body: rgba(56, 22, 26, 0.75); /* Dark Burgundy Charcoal */
   
   /* Legacy/Base mappings */
   --color-black: var(--color-background);
